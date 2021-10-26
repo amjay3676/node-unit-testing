@@ -9,7 +9,7 @@
     "test-w": "jest --watchAll"
   },
   "keywords": [],
-  "author": "Rahman Fadhil <rhmnfadhil@gmail.com> (https://rahmanfadhil.com/)",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",

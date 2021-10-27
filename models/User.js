@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 const schema = mongoose.Schema({
     email: {
         type: String,
@@ -7,6 +11,7 @@ const schema = mongoose.Schema({
     },
     password: {
         type: String,
+        select: false,
         require: [true, "User email is required."]
     },
     phone: {

@@ -32,8 +32,6 @@ router.post("/register", async (req, res) => {
             email,
         };
         let token = jwtoken.createJWT(payload);
-        console.log(token);
-        console.log("check2");
         user.token = token;
         await user.save();
 
@@ -41,6 +39,35 @@ router.post("/register", async (req, res) => {
     } catch (err) {
         return res.status(401).json(err);
     }
-})
+});
 
+// @route  POST api/user/login
+// @desc   login user
+// @access public
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        //check for user exist
+        const user = await User.findOne({ email }).select("+password").exec();
+        if(!user) {
+            throw new CustomException("Enter email is not registered, First SignUp!", 403);
+        }
+        //verify password 
+        let isPasswordTrue = hashPassword.compareHashPassword(password, user.password);
+        if(!isPasswordTrue) {
+            throw new CustomException("Invalid Password!", 403);
+        }
+        //generate token for login user
+        let payload = {
+            userId: user._id,
+            email,
+        }
+        let token = jwtoken.createJWT(payload);
+        user.token = token;
+        user.password = "Private";
+        res.status(200).json(user);
+    } catch (err) {
+        res.json(err);
+    }
+})
 module.exports = router;

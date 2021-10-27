@@ -7,7 +7,7 @@ const schema = mongoose.Schema({
     },
     password: {
         type: String,
-        require: true,
+        require: [true, "User email is required."]
     },
     phone: {
         type: String,
@@ -17,8 +17,11 @@ const schema = mongoose.Schema({
           },
           message: props => `${props.value} is not a valid phone number!`
         },
-        required: [true, 'User phone number required']
-      }
+        required: [true, "User phone number required"]
+      },
+    token: {
+      type: String,
+    }
   });
 
-module.exports = User = mongoose.model("User", UserSchema);
+module.exports = User = mongoose.model("User", schema);

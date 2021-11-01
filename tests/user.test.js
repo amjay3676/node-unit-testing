@@ -35,34 +35,6 @@ beforeEach((done) => {
             password: data.password,
         })
         .expect(200);
-        // .then( async (response) => {
-        //     expect(response.body).toMatchObject({ token: expect.anything()});
-        // })
     expect(response.body);
 
   })
-//   beforeAll((done) => {
-//      request(app)
-//       .post("/api/register")
-//       .send({
-//         phone: "8058360163",
-//         email: "lmessi@fcbarcelona.com",
-//         password: "12345678",
-//       })
-//       .end((err, response) => {
-//         token = response.body.token; // save the token!
-//         done();
-//       });
-    
-//     request(app)
-//       .post("/api/login")
-//       .send({
-//         email: "lmessi@fcbarcelona.com",
-//         password: "12345678",
-//       })
-//       .end((err, res) => {
-//         console.log(res.body.token)
-//         token = res.body.token; // save the token!
-//         done();
-//       });
-//   });
